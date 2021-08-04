@@ -4,38 +4,37 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View.GONE
 import android.view.View.VISIBLE
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myapplication.R
 import com.example.myapplication.databinding.ActivityMainBinding
 import com.example.myapplication.model.data.AppState
-import com.example.myapplication.presenter.Presenter
 import com.example.myapplication.view.base.View
-
 import com.example.myapplication.view.main.adapter.MainAdapter
+import com.example.myapplication.application.DictionaryApp
+import javax.inject.Inject
 
 class MainActivity : AppCompatActivity(), View {
+    @Inject
+    internal lateinit var viewmodelFactory: ViewModelProvider.Factory
+
     private var adapter: MainAdapter? = null
-    private val presenter: Presenter<AppState, View> = MainPresenterImpl()
+    val model: MainViewModel by lazy {
+        viewmodelFactory.create(MainViewModel::class.java)
+    }
+    private val observer = Observer<AppState> { renderData(it) }
     private var _binding: ActivityMainBinding? = null
     private val binding get() = _binding!!
     override fun onCreate(savedInstanceState: Bundle?) {
+        DictionaryApp.component.inject(this)
         super.onCreate(savedInstanceState)
         _binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         binding.searchButton.setOnClickListener {
-            presenter.getData(binding.searchEditText.text.toString(), true)
+            model.getData(binding.searchEditText.text.toString(), true)
         }
-
-    }
-
-    override fun onStart() {
-        super.onStart()
-        presenter.attachView(this)
-    }
-
-    override fun onStop() {
-        super.onStop()
-        presenter.detachView(this)
+        model.viewState.observe(this, observer)
     }
 
     override fun renderData(appState: AppState) {
@@ -67,7 +66,7 @@ class MainActivity : AppCompatActivity(), View {
     private fun showErrorScreen(error: String?) {
         showViewError()
         binding.errorTextView.text = error ?: getString(R.string.error_undefined)
-        binding.reloadButton.setOnClickListener { presenter.getData("Hi", true) }
+        binding.reloadButton.setOnClickListener { model.getData("Hi", true) }
     }
 
     private fun showViewSuccess() {

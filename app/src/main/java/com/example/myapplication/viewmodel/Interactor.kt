@@ -1,4 +1,4 @@
-package com.example.myapplication.presenter
+package com.example.myapplication.viewmodel
 
 import io.reactivex.Observable
 
