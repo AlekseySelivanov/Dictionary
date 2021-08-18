@@ -8,15 +8,14 @@ import android.view.View.GONE
 import android.view.View.VISIBLE
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.core.BaseActivity
+import com.example.historyscreen.view.history.HistoryActivity
 import com.example.myapplication.R
 import com.example.myapplication.databinding.ActivityMainBinding
-import com.example.myapplication.model.data.AppState
-import com.example.myapplication.model.data.DataModel
-import com.example.myapplication.view.base.BaseActivity
-import com.example.myapplication.view.descriptionscreen.DescriptionActivity
-import com.example.myapplication.view.history.HistoryActivity
-import com.example.myapplication.view.history.search.HistorySearchActivity
 import com.example.myapplication.view.main.adapter.MainAdapter
+import com.example.translator.model.data.AppState
+import com.example.translator.model.data.DataModel
+import com.example.translator.view.descriptionscreen.DescriptionActivity
 import org.koin.android.ext.android.get
 
 class MainActivity : BaseActivity<AppState>() {
@@ -34,7 +33,7 @@ class MainActivity : BaseActivity<AppState>() {
                         this@MainActivity,
                         data.text!!,
                         data.meanings!![0].translation?.translation.toString(),
-                        data.meanings[0].imageUrl
+                        data.meanings!![0].imageUrl
                     )
                 )
             }
@@ -59,10 +58,6 @@ class MainActivity : BaseActivity<AppState>() {
         return when (item.itemId) {
             R.id.menu_history -> {
                 startActivity(Intent(this, HistoryActivity::class.java))
-                true
-            }
-            R.id.menu_history_search -> {
-                startActivity(Intent(this, HistorySearchActivity::class.java))
                 true
             }
             else -> super.onOptionsItemSelected(item)

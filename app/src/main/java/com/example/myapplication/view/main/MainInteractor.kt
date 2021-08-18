@@ -1,10 +1,11 @@
 package com.example.myapplication.view.main
 
-import com.example.myapplication.model.data.AppState
-import com.example.myapplication.model.data.DataModel
-import com.example.myapplication.model.repository.Repository
-import com.example.myapplication.model.repository.RepositoryLocal
-import com.example.myapplication.viewmodel.Interactor
+import com.example.core.viewmodel.Interactor
+import com.example.repository.Repository
+import com.example.repository.RepositoryLocal
+import com.example.translator.model.data.AppState
+import com.example.translator.model.data.DataModel
+
 
 class MainInteractor(
     private val remoteRepository: Repository<DataModel>,

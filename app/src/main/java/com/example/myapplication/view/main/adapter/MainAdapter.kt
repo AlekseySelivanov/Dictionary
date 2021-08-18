@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.databinding.ActivityMainItemBinding
-import com.example.myapplication.model.data.DataModel
+import com.example.translator.model.data.DataModel
 
 class MainAdapter(
     private var data: List<DataModel>,

@@ -1,8 +1,8 @@
 package com.example.myapplication.view.main
 
 import androidx.lifecycle.LiveData
-import com.example.myapplication.model.data.AppState
-import com.example.myapplication.viewmodel.BaseViewModel
+import com.example.core.viewmodel.BaseViewModel
+import com.example.translator.model.data.AppState
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -23,7 +23,6 @@ class MainViewModel (
         cancelJob()
         viewModelCoroutineScope.launch { startInteractor(word, isOnline) }
     }
-
     private suspend fun startInteractor(word: String, isOnline: Boolean) = withContext(Dispatchers.IO) {
         _mutableLiveData.postValue(interactor.getData(word, isOnline))
     }
