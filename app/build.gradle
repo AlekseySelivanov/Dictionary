@@ -5,17 +5,21 @@ plugins {
 }
 
 android {
-    compileSdkVersion 30
-    buildToolsVersion "30.0.3"
+    compileSdkVersion Config.compile_sdk
+    buildToolsVersion Config.build_tools_version
 
     defaultConfig {
-        applicationId "com.example.myapplication"
-        minSdkVersion 21
-        targetSdkVersion 30
-        versionCode 1
-        versionName "1.0"
+        applicationId Config.application_id
+        minSdkVersion Config.min_sdk
+        targetSdkVersion Config.target_sdk
+        versionCode Releases.version_code
+        versionName Releases.version_name
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildFeatures {
+        viewBinding = true
     }
 
     buildTypes {
@@ -25,22 +29,19 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility Config.java_version
+        targetCompatibility Config.java_version
     }
     kotlinOptions {
         jvmTarget = '1.8'
     }
-    buildFeatures {
-        viewBinding = true
-    }
+    dynamicFeatures = [Modules.historyScreen]
 }
 
 dependencies {
     implementation project(Modules.core)
     implementation project(Modules.model)
     implementation project(Modules.repository)
-    implementation project(Modules.historyScreen)
     implementation project(Modules.descriptionScreen)
 
     //AndroidX
@@ -59,7 +60,7 @@ dependencies {
 
     //Koin for Android
     implementation Koin.koin_android
-    //implementation 'org.koin:koin-android-viewmodel:2.0.1'
+    implementation Koin.koin_viewmodel
 
     //Room
     implementation Room.runtime
@@ -71,6 +72,9 @@ dependencies {
     implementation Retrofit.converter_gson
     implementation Retrofit.logging_interceptor
     implementation Retrofit.adapter_coroutines
+
+    //Google Play libraries
+    implementation GooglePlay.googlePlayCore
 
     implementation Design.constraint
     testImplementation TestImpl.junit
