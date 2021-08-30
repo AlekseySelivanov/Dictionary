@@ -11,13 +11,13 @@ import com.example.historyscreen.databinding.ActivityHistoryBinding
 import com.example.historyscreen.di.injectDependencies
 
 import com.example.translator.model.data.AppState
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.androidx.scope.currentScope
 
 class HistoryActivity : BaseActivity<AppState>() {
 
 
     private var adapter: HistoryAdapter? = null
-    override val model: HistoryViewModel by viewModel()
+    override lateinit var model: HistoryViewModel
     private val observer = Observer<AppState> { renderData(it) }
     private var _binding: ActivityHistoryBinding? = null
     private val binding get() = _binding!!
@@ -26,6 +26,8 @@ class HistoryActivity : BaseActivity<AppState>() {
         _binding = ActivityHistoryBinding.inflate(layoutInflater)
         setContentView(binding.root)
         injectDependencies()
+        val viewModel: HistoryViewModel by currentScope.inject()
+        model = viewModel
         model.subscribe().observe(this, observer)
     }
 

@@ -20,11 +20,12 @@ object Modules {
     const val repository = ":repository"
     const val historyScreen = ":historyScreen"
     const val descriptionScreen = ":descriptionScreen"
+    const val utils = ":utils"
 }
 
 object Versions{
     //Design
-    const val appcompat = "1.1.0-rc01"
+    const val appcompat = "1.4.0-alpha03"
     const val constraint = "2.1.0"
     const val swiperefresh = "1.1.0"
     const val material = "1.4.0"
@@ -62,7 +63,6 @@ object Versions{
 
     //Google Play
     const val googlePlayCore = "1.10.0"
-
 }
 
 object Design {
@@ -90,7 +90,6 @@ object Retrofit {
 object Koin {
     const val koin_android = "org.koin:koin-android:${Versions.koinAndroid}"
     const val koin_viewmodel =  "org.koin:koin-androidx-viewmodel:${Versions.koinViewModel}"
-
 }
 
 object Picasso {
