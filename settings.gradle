@@ -1,2 +1,8 @@
 rootProject.name = "My Application"
-include ':app'
+include ":app"
+include ":model"
+include ":repository"
+include ':historyScreen'
+include ':core'
+include ':descriptionScreen'
+

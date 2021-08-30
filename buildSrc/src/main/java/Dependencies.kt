@@ -43,6 +43,7 @@ object Versions{
 
     //Koin
     const val koinAndroid = "2.0.1"
+    const val koinViewModel = "2.0.1"
 
     //Picasso
     const val picasso = "2.5.2"
@@ -58,6 +59,9 @@ object Versions{
 
     //const val runner = "1.2.0"
     const val espressoCore = "3.4.0"
+
+    //Google Play
+    const val googlePlayCore = "1.10.0"
 
 }
 
@@ -85,6 +89,8 @@ object Retrofit {
 
 object Koin {
     const val koin_android = "org.koin:koin-android:${Versions.koinAndroid}"
+    const val koin_viewmodel =  "org.koin:koin-androidx-viewmodel:${Versions.koinViewModel}"
+
 }
 
 object Picasso {
@@ -101,4 +107,8 @@ object TestImpl {
     const val junit = "junit:junit:${Versions.jUnit}"
     const val junit_android = "androidx.test.ext:junit:${Versions.jUnitAndroid}"
     const val espresso = "androidx.test.espresso:espresso-core:${Versions.espressoCore}"
+}
+
+object GooglePlay {
+    const val googlePlayCore = "com.google.android.play:core:${Versions.googlePlayCore}"
 }
